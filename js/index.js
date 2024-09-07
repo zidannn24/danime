@@ -45,7 +45,7 @@ async function fetchData(title){
             details.href = 'details.html'
             details.textContent = 'Details'
             details.addEventListener('click', function(){
-                localStorage.setItem('animeId', anime.mal_id);
+                sessionStorage.setItem('animeId', anime.mal_id);
             })
             
             cardWrapper.appendChild(card)
