@@ -64,8 +64,26 @@ const malId = sessionStorage.getItem('animeId')
             genreDetails.classList.add('genre-details')
             genreDetails.innerHTML = `<span>Genres</span>: ${data.data.genres.map(genreAnime => genreAnime.name).join(", ")}`
 
+            const synopsisWrapper = document.createElement('div')
+            synopsisWrapper.classList.add('synopsis-wrapper')
+            
+            const synopsis = document.createElement('p')
+            synopsis.innerHTML = `<span>Synopsis</span>:`
+
+            const synopsisDetails = document.createElement('p')
+            synopsisDetails.innerHTML = `${data.data.synopsis}`
+
+            const studiosDetails = document.createElement('p')
+            studiosDetails.classList.add('studios-details')
+            studiosDetails.innerHTML = `<span>Studios</span>: ${data.data.studios.map(studioAnime => studioAnime.name).join(", ")}`
+
+            const trailerAnime = document.createElement('iframe')
+            trailerAnime.classList.add('trailer-anime')
+            trailerAnime.src = `${data.data.trailer.embed_url}`
+
+            synopsisWrapper.append(synopsis, synopsisDetails)
             someDetails.append(titleDetails, scoreDetails, episodesDetails, statusDetails, airedDetails, typeDetails, durationDetails)
-            detailsWrapper.append(imgDetail, someDetails, genreDetails)
+            detailsWrapper.append(imgDetail, someDetails, genreDetails, synopsisWrapper, studiosDetails, trailerAnime)
             detailsAnime.appendChild(detailsWrapper)
         }catch(error){
             console.error(error);
