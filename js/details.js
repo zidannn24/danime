@@ -46,7 +46,7 @@ const malId = sessionStorage.getItem('animeId')
             scoreDetails.innerHTML = `<span>Score</span>: ${data.data.score}`
 
             const episodesDetails = document.createElement('p')
-            episodesDetails.innerHTML = `<span>Eposides</span>: ${data.data.episodes}`
+            episodesDetails.innerHTML = `<span>Episodes</span>: ${data.data.episodes}`
 
             const statusDetails = document.createElement('p')
             statusDetails.innerHTML = `<span>Status</span>: ${data.data.status}`
@@ -77,13 +77,22 @@ const malId = sessionStorage.getItem('animeId')
             studiosDetails.classList.add('studios-details')
             studiosDetails.innerHTML = `<span>Studios</span>: ${data.data.studios.map(studioAnime => studioAnime.name).join(", ")}`
 
-            const trailerAnime = document.createElement('iframe')
-            trailerAnime.classList.add('trailer-anime')
-            trailerAnime.src = `${data.data.trailer.embed_url}`
+            let con = null
+            if (data.data.trailer.embed_url === null){
+                const nullTrailer = document.createElement('h1')
+                nullTrailer.classList.add('null-trailer')
+                nullTrailer.innerHTML = 'This anime does not have a trailer'
+                con = nullTrailer
+            } else {
+                const trailerAnime = document.createElement('iframe')
+                trailerAnime.classList.add('trailer-anime')
+                trailerAnime.src = `${data.data.trailer.embed_url}`
+                con = trailerAnime
+            }
 
             synopsisWrapper.append(synopsis, synopsisDetails)
             someDetails.append(titleDetails, scoreDetails, episodesDetails, statusDetails, airedDetails, typeDetails, durationDetails)
-            detailsWrapper.append(imgDetail, someDetails, genreDetails, synopsisWrapper, studiosDetails, trailerAnime)
+            detailsWrapper.append(imgDetail, someDetails, genreDetails, synopsisWrapper, studiosDetails, con)
             detailsAnime.appendChild(detailsWrapper)
         }catch(error){
             console.error(error);
