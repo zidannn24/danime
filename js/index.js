@@ -28,12 +28,55 @@ btnTopAnime.addEventListener('click', function(){
     header.innerHTML = ''
 })
 
+onGoing()
+async function onGoing(){
+    try{
+        const res = await fetch('https://api.jikan.moe/v4/seasons/now')
+    
+        if(!res.ok){
+            throw new Error('Gagal Fetching')
+        }
+    
+        const data = await res.json()
+        
+        cardWrapper.innerHTML = ''
+    
+        data.data.forEach(anime=>{
+            showData(anime)
+        })
+    }catch(error){
+        console.error(error);
+    }
+}
+
+async function topAnime(){
+    try{
+        const res = await fetch('https://api.jikan.moe/v4/top/anime')
+    
+        if(!res.ok){
+            throw new Error('Gagal Fetching')
+        }
+    
+        const data = await res.json()
+        
+        cardWrapper.innerHTML = ''
+    
+        data.data.forEach(anime=>{
+            showData(anime)
+        })
+    }catch(error){
+        console.error(error);
+    }
+}
+
 async function fetchData(title){
     try{
         const res = await fetch(`${API_URL}?q=${title}`)
+
         if(!res.ok){
             throw new Error('Gagal Fetching data')
         }
+
         const data = await res.json()
 
         header.innerHTML = ''
@@ -45,31 +88,6 @@ async function fetchData(title){
         header.append(resultText)
         data.data.forEach(anime=>{
             showData(anime)
-
-            // console.log(anime.mal_id);
-
-            // const card = document.createElement('div')
-            // card.classList.add('card')
-
-            // const imgBox = document.createElement('div')
-            // imgBox.classList.add('img-box')
-
-            // const img = document.createElement('img')
-            // img.src = anime.images.webp.large_image_url
-
-            // const title = document.createElement('p')
-            // title.innerHTML = anime.title
-
-            // const details = document.createElement('a')
-            // details.href = 'details.html'
-            // details.textContent = 'Details'
-            // details.addEventListener('click', function(){
-            //     sessionStorage.setItem('animeId', anime.mal_id);
-            // })
-            
-            // cardWrapper.appendChild(card)
-            // card.append(imgBox, title, details)
-            // imgBox.appendChild(img)
         })
     }catch(error){
         console.error(error);
@@ -99,29 +117,4 @@ function showData(anime){
     cardWrapper.appendChild(card)
     card.append(imgBox, title, details)
     imgBox.appendChild(img)
-}
-
-onGoing()
-async function onGoing(){
-    const res = await fetch('https://api.jikan.moe/v4/seasons/now')
-    const data = await res.json()
-    // console.log(data);
-    
-    cardWrapper.innerHTML = ''
-
-    data.data.forEach(anime=>{
-        showData(anime)
-    })
-}
-
-async function topAnime(){
-    const res = await fetch('https://api.jikan.moe/v4/top/anime')
-    const data = await res.json()
-    // console.log(data);
-    
-    cardWrapper.innerHTML = ''
-
-    data.data.forEach(anime=>{
-        showData(anime)
-    })
 }
