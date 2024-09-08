@@ -32,9 +32,37 @@ nav h1{
     /* border: 1px solid red; */
 }
 
-nav input{
+nav .nav-right{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     /* border: 1px solid red; */
-    width: 50%;
+    align-items: center;
+    /* justify-content: space-between; */
+}
+
+nav .nav-right .btn{
+    /* border: 1px solid red; */
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    gap: 0.5rem;
+}
+
+nav .nav-right .btn button{
+    background-color: #ECDFCC;
+    color: #1E201E;
+    border: none;
+    padding: 10px 15px;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+nav .nav-right input{
+    /* border: 1px solid red; */
+    width: 100%;
     padding: 0.3rem;
     font-size: 1rem;
     background: none;
@@ -48,12 +76,13 @@ nav input{
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding-block: 10rem;
+    padding-block: 12rem;
     padding-inline: 10px;
+    gap: 1rem;
     /* border: 1px solid red; */
 }
 
-.result-search h1{
+.result-search .header{
     color: #ECDFCC;
     font-size: 1.3rem;
 }
@@ -201,11 +230,46 @@ nav input{
     grid-column: 1/5;
 }
 
+.details-anime .details-wrapper .chars-and-va-wrapper{
+    grid-column: 1/5;
+    /* border: 1px solid #697565; */
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+}
+
+.details-anime .details-wrapper .chars-and-va-wrapper .chars-and-va-card{
+    display: flex;
+    /* width: 100%; */
+    border: 1px solid #697565;
+    gap: 5px;
+}
+
+.details-anime .details-wrapper .chars-and-va-wrapper .chars-and-va-card img{
+    max-width: 65px;
+}
+
+.details-anime .details-wrapper .chars-and-va-wrapper .chars-and-va-card .name-char{
+    color: #ECDFCC;
+    /* padding: 10px; */
+    font-weight: 600;
+    font-size: 0.7rem;
+}
+
+.details-anime .details-wrapper .chars-and-va-wrapper .chars-and-va-card .role-char{
+    color: #697565;
+    font-size: 0.7rem;
+}
+
 @media (min-width: 768px) {
     nav{
         flex-direction: row;
         justify-content: space-between;
         padding-inline: 1rem;
+    }
+
+    nav .nav-right{
+        flex-direction: row;
     }
     
     nav input{
@@ -213,16 +277,33 @@ nav input{
         padding: 0.5rem;
     }
 
+    .result-search{
+        padding-block: 7rem;
+    }
+
     .details-anime .details-wrapper{
-        grid-template-rows: 2fr;
+        grid-template-rows: repeat(3, auto);
     }
 
     .details-anime .details-wrapper img{
         grid-column: 1/3;
+        grid-row: 1/4;
     }
 
     .details-anime .details-wrapper .some-details{
         grid-column: 3/5;
+        grid-row: 1/2;
+        /* max-height: 50%; */
+    }
+
+    .details-anime .details-wrapper .genre-details{
+        grid-column: 3/5;
+        grid-row: 2/3;
+    }
+    
+    .details-anime .details-wrapper .studios-details{
+        grid-column: 3/5;
+        grid-row: 3/4;
     }
     
     /* .result-search .card-wrapper{
@@ -230,8 +311,8 @@ nav input{
     } */
 }
 
-@media (min-width: 1024px) {
+/* @media (min-width: 1024px) {
     nav input{
         max-width: 40%;
     }
-}
+} */

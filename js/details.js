@@ -1,6 +1,9 @@
 const API_URL = 'https://api.jikan.moe/v4/anime'
 
 const detailTitle = document.getElementById('detail-title')
+const detailsAnime = document.getElementById('details-anime')
+const charsAndVaWrapper = document.createElement('div')
+charsAndVaWrapper.classList.add('chars-and-va-wrapper')
 
 const malId = sessionStorage.getItem('animeId')
     getId(malId)
@@ -9,7 +12,7 @@ const malId = sessionStorage.getItem('animeId')
         try{
             const res = await fetch(`${API_URL}/${id}`)
             const data = await res.json()
-            const detailsAnime = document.getElementById('details-anime')
+            
             // hero.style.width = '100%'
             // hero.style.height = '300px'
             // hero.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${data.data.images.webp.large_image_url})`
@@ -90,11 +93,49 @@ const malId = sessionStorage.getItem('animeId')
                 con = trailerAnime
             }
 
+            
+            // charsAndVaWrapper.append(charsAndVa(data.data.mal_id))
+
             synopsisWrapper.append(synopsis, synopsisDetails)
             someDetails.append(titleDetails, scoreDetails, episodesDetails, statusDetails, airedDetails, typeDetails, durationDetails)
-            detailsWrapper.append(imgDetail, someDetails, genreDetails, synopsisWrapper, studiosDetails, con)
+            detailsWrapper.append(imgDetail, someDetails, genreDetails, synopsisWrapper, studiosDetails, con, charsAndVaWrapper)
             detailsAnime.appendChild(detailsWrapper)
+            
+            charsAndVa(data.data.mal_id)
         }catch(error){
             console.error(error);
         }
     }
+
+async function charsAndVa(id){
+    try{
+        const res = await fetch(`${API_URL}/${id}/characters?limit=5`)
+        const data = await res.json()
+        data.data.forEach(data=>{
+
+            const charsAndVaCard = document.createElement('div')
+            charsAndVaCard.classList.add('chars-and-va-card')
+
+            const nameAndRoleWrapper = document.createElement('div')
+            nameAndRoleWrapper.classList.add('name-and-role-wrapper')
+
+            const nameChar = document.createElement('p')
+            nameChar.classList.add('name-char')
+            nameChar.innerHTML = data.character.name
+
+            const imgChar = document.createElement('img')
+            imgChar.src = data.character.images.webp.image_url
+
+            const roleChar = document.createElement('p')
+            roleChar.classList.add('role-char')
+            roleChar.innerHTML = data.role
+
+            nameAndRoleWrapper.append(nameChar, roleChar)
+            charsAndVaCard.append(imgChar, nameAndRoleWrapper)
+            charsAndVaWrapper.append(charsAndVaCard)
+            console.log(data);
+        })
+    }catch(error){
+        console.error(error);
+    }
+}
