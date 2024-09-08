@@ -150,7 +150,7 @@ nav .nav-right input{
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-block: 10rem;
+    padding-block: 12rem;
     padding-inline: 10px;
 }
 
@@ -279,6 +279,10 @@ nav .nav-right input{
 
     .result-search{
         padding-block: 7rem;
+    }
+
+    .details-anime{
+        padding-block: 8rem;
     }
 
     .details-anime .details-wrapper{
