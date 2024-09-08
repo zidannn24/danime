@@ -18,10 +18,6 @@ async function getId(id){
         
         const data = await res.json()
 
-        const btnBack = document.createElement('button')
-        btnBack.textContent = 'Back'
-        btnBack.classList.add('btn-back')
-
         const detailsWrapper = document.createElement('div')
         detailsWrapper.classList.add('details-wrapper')
             
@@ -85,7 +81,7 @@ async function getId(id){
         synopsisWrapper.append(synopsis, synopsisDetails)
         someDetails.append(titleDetails, scoreDetails, episodesDetails, statusDetails, airedDetails, typeDetails, durationDetails)
         detailsWrapper.append(imgDetail, someDetails, genreDetails, synopsisWrapper, studiosDetails, con, charsAnimeWrapper)
-        detailsAnime.append(btnBack, detailsWrapper)
+        detailsAnime.append(detailsWrapper)
         
         charsAnime(data.data.mal_id)
     }catch(error){
