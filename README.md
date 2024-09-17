@@ -1,7 +1,7 @@
 # Danime
 
 ## Deskripsi
-Danime adalah web untuk menampilkan beberapa card Anime dan details dari suatu Anime berdasarkan Top Ranking, Anime yang sedang On going, dan sebuah search untuk user mencari nama Anime.
+Danime adalah web untuk menampilkan beberapa card Anime dan details dari suatu Anime berdasarkan Top Ranking, Anime yang sedang On going, dan sebuah search untuk user mencari nama Anime. Web ini menggunakan API dari Jikan Moe
 
 ## Fitur
 - Halaman untuk menampilkan List list anime
@@ -14,7 +14,6 @@ Danime adalah web untuk menampilkan beberapa card Anime dan details dari suatu A
 - HTML
 - CSS
 - JAVASCRIPT
-- API DARI JIKAN MOE
 
 ## Screenshot
 ### Halaman list list anime
